@@ -73,6 +73,20 @@ dns-asan)
   TARGET_BINS=("./dnsmasq-asan")
   ;;
 
+bind9)
+  PROJECT_NAME="bind9"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -P DNS -K -R"
+  TARGET_CONF="-f -c ./conf/bind9.conf"
+  TARGET_BINS=("./named")
+  ;;
+
+unbound)
+  PROJECT_NAME="unbound"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -P DNS -K -R"
+  TARGET_CONF="-d -c ./conf/unbound.conf"
+  TARGET_BINS=("./unbound")
+  ;;
+
 dtls)
   PROJECT_NAME="dtls"
   AFL_ARGS="-m 512 -i ./conf/in-dtls -P DTLS12 -q 3 -s 3 -E -K -R"
