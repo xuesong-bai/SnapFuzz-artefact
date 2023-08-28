@@ -89,6 +89,18 @@ make -j
 cp ./sabre "${FINISH_DIR}/sabre"
 cp ./plugins/sbr-afl/libsbr-afl.so "${FINISH_DIR}/libsbr-afl-and-fs.so"
 
+#### SaBRe ####
+cd "${BUILD_DIR}"
+
+git clone https://github.com/andronat/SaBRe.git sabre_new
+cd sabre_new
+
+mkdir build
+cd build
+cmake -DCMAKE_BUILD_TYPE=RELEASE ..
+make -j
+cp ./sabre "${FINISH_DIR}/sabre"
+
 #### Build LightFTP ####
 cd "${BUILD_DIR}"
 
