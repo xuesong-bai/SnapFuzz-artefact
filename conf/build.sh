@@ -143,6 +143,28 @@ sed -i 's/LDFLAGS       =/LDFLAGS= -fsanitize=address/' Makefile
 CC="${BUILD_DIR}/aflnet/afl-clang-fast" make -j
 cp ./src/dnsmasq "${FINISH_DIR}/dnsmasq-asan"
 
+#### Build BIND 9 ####
+cd "${BUILD_DIR}"
+
+wget https://downloads.isc.org/isc/bind9/9.18.0/bind-9.18.0.tar.xz
+tar -xf bind-9.18.0.tar.xz && rm bind-9.18.0.tar.xz
+cd bind-9.18.0
+
+sudo apt install -y pkg-config libuv1-dev libnghttp2-dev libssl-dev libxml2 libcap-dev libexpat-dev
+CC="${BUILD_DIR}/aflnet/afl-clang-fast" ./configure
+make -j
+cp ./bin/named/.libs/named "${FINISH_DIR}/named"
+
+#### Build Unbound ####
+cd "${BUILD_DIR}"
+
+wget https://nlnetlabs.nl/downloads/unbound/unbound-1.16.0.tar.gz 
+tar -xf unbound-1.16.0.tar.gz && rm unbound-1.16.0.tar.gz && cd unbound-1.16.0
+
+CC="${BUILD_DIR}/aflnet/afl-clang-fast" ./configure
+make -j
+cp ./unbound "${FINISH_DIR}/unbound"
+
 #### Build DICOM ####
 cd "${BUILD_DIR}"
 

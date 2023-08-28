@@ -25,6 +25,8 @@ rm -f dcmqrscp
 rm -f dcmqrscp-asan
 rm -f dnsmasq
 rm -f dnsmasq-asan
+rm -f named
+rm -f unbound
 rm -f dtls-server
 rm -f dtls-server-asan
 rm -f fftp

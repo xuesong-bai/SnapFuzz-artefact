@@ -55,6 +55,42 @@ dns)
   TARGET_CONF="-C ./conf/dnsmasq.conf"
   TARGET_BINS=("./dnsmasq")
   ;;
+bind9)
+  PROJECT_NAME="bind9"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -N tcp://127.0.0.1/5353 -P DNS -D 10000 -K -R"
+  TARGET_CONF="-c ./conf/bind9.conf"
+  TARGET_BINS=("./named")
+  ;;
+bind9-recursive)
+  PROJECT_NAME="bind9-recursive"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -N tcp://127.0.0.1/5353 -P DNS -D 10000 -K -R"
+  TARGET_CONF="-c /home/ubuntu/snap_bind9_conf/recursive.conf"
+  TARGET_BINS=("./named")
+  ;;
+bind9-forward_only)
+  PROJECT_NAME="bind9-forward_only"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -N tcp://127.0.0.1/5353 -P DNS -D 10000 -K -R"
+  TARGET_CONF="-c /home/ubuntu/snap_bind9_conf/forward_only.conf"
+  TARGET_BINS=("./named")
+  ;;
+bind9-forward_fallback)
+  PROJECT_NAME="bind9-forward_fallback"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -N tcp://127.0.0.1/5353 -P DNS -D 10000 -K -R"
+  TARGET_CONF="-c /home/ubuntu/snap_bind9_conf/forward_fallback.conf"
+  TARGET_BINS=("./named")
+  ;;
+bind9-forward_global)
+  PROJECT_NAME="bind9-forward_global"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -N tcp://127.0.0.1/5353 -P DNS -D 10000 -K -R"
+  TARGET_CONF="-c /home/ubuntu/snap_bind9_conf/forward_global.conf"
+  TARGET_BINS=("./named")
+  ;;
+unbound)
+  PROJECT_NAME="unbound"
+  AFL_ARGS="-m 512 -i ./conf/in-dns -N tcp://127.0.0.1/5353 -P DNS -D 10000 -K -R"
+  TARGET_CONF="-d -c ./conf/unbound.conf"
+  TARGET_BINS=("./unbound")
+  ;;
 dtls)
   PROJECT_NAME="dtls"
   AFL_ARGS="-m 512 -i ./conf/in-dtls -N udp://127.0.0.1/20220 -P DTLS12 -D 10000 -q 3 -s 3 -E -K -R -W 2"
